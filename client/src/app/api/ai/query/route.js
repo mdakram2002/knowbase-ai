@@ -3,7 +3,7 @@ import { GoogleGenerativeAI } from "@google/generative-ai";
 import { MongoClient } from "mongodb";
 
 const MONGODB_URI = process.env.MONGODB_URI;
-const DB_NAME = "secondbrain";
+const DB_NAME = "knowbase";
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 
 let clientPromise;
@@ -69,7 +69,7 @@ export async function POST(request) {
 
     const model = genAI.getGenerativeModel({ model: "gemini-pro" });
 
-    const prompt = `You are SecondBrain AI, a knowledge management assistant. You have access to the user's knowledge base below.
+    const prompt = `You are KnowBase AI, a knowledge management assistant. You have access to the user's knowledge base below.
 
 USER'S KNOWLEDGE BASE:
 ${context}

@@ -18,12 +18,12 @@ export default function OverviewSection() {
           <div className="space-y-6">
             <div>
               <h3 className="text-lg font-semibold text-gray-900 mb-3">
-                What is Second Brain?
+                What is KnowBase AI?
               </h3>
               <p className="text-gray-600 mb-4">
-                Second Brain is an AI-powered knowledge management system that helps you capture,
+                KnowBase AI is an AI-powered knowledge management platform that helps you capture,
                 organize, and intelligently retrieve your accumulated knowledge. Think of it as
-                "infrastructure for thought" - a personal digital brain that remembers everything
+                "infrastructure for thought" - a personal digital knowledge base that remembers everything
                 you learn and helps you make connections.
               </p>
             </div>

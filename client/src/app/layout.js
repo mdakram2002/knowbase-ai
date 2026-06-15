@@ -1,15 +1,23 @@
+import { Inter } from "next/font/google";
 import { Toaster } from "react-hot-toast";
 import "./globals.css";
 
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-inter",
+  display: "swap",
+});
+
 export const metadata = {
-  title: "Second Brain - AI Knowledge Management",
-  description: "Capture, organize, and intelligently surface your knowledge",
+  title: "KnowBase AI - AI-Powered Knowledge Management Platform",
+  description:
+    "Capture, organize, and intelligently surface your knowledge with AI-powered semantic search",
 };
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
-      <body className="font-sans">
+    <html lang="en" className={inter.variable}>
+      <body className="font-sans antialiased">
         {children}
         <Toaster
           position="top-right"
@@ -18,6 +26,7 @@ export default function RootLayout({ children }) {
             style: {
               background: "#1f2937",
               color: "#fff",
+              borderRadius: "12px",
             },
             success: {
               style: {

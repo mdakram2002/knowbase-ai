@@ -1,7 +1,7 @@
 {
-  "name": "second-brain-backend",
+  "name": "knowbase-ai-backend",
   "version": "1.0.0",
-  "description": "Backend API for Second Brain Application",
+  "description": "Backend API for KnowBase AI Application",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
@@ -33,7 +33,7 @@
     "mongodb",
     "ai",
     "api",
-    "second-brain"
+    "knowbase-ai"
   ],
   "author": "",
   "license": "MIT"

@@ -34,11 +34,11 @@ export default function EmbedPage() {
   };
 
   return (
-    <div className="min-h-screen bg-linear-to-br from-blue-50 to-purple-50 p-4">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-purple-50 p-4">
       <div className="max-w-2xl mx-auto bg-white rounded-xl shadow-lg p-6">
         <div className="text-center mb-8">
           <h1 className="text-2xl font-bold text-gray-900 mb-2">
-            Second Brain Search
+            KnowBase AI Search
           </h1>
           <p className="text-gray-600">
             Ask questions about the knowledge base

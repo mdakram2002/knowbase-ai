@@ -1,12 +1,27 @@
+import Link from "next/link";
 import Card from "@/components/ui/Card";
-import { Monitor, Server, GitPullRequest } from "lucide-react";
+import { Monitor, Server, GitPullRequest, ArrowLeft } from "lucide-react";
 import { projectURLs } from "../utils/constants";
 
 export default function DocsHeader() {
   return (
     <div className="mb-8">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
+        <div>
+          <h1 className="text-4xl font-bold text-gray-900 mb-2">
+            KnowBase AI Documentation
+          </h1>
+          <p className="text-gray-600">
+            Complete technical documentation for the AI-powered knowledge management system.
+          </p>
+        </div>
+        <Link href="/" className="inline-flex items-center gap-2 rounded-full border border-gray-200 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm transition hover:border-primary-300 hover:text-primary-600">
+          <ArrowLeft className="w-4 h-4" />
+          Home
+        </Link>
+      </div>
       <h1 className="text-4xl font-bold text-gray-900 mb-4">
-        Second Brain App Documentation
+        KnowBase AI Documentation
       </h1>
       <p className="text-gray-600 mb-6">
         Complete technical documentation for the AI-powered knowledge management system

@@ -18,7 +18,7 @@ const initialMessages = [
     id: 1,
     role: "assistant",
     content:
-      "Hello! I'm your SecondBrain AI assistant. I can help you analyze your knowledge, find patterns, answer questions, and generate insights. How can I help you today?",
+      "Hello! I'm your KnowBase AI assistant. I can help you analyze your knowledge, find patterns, answer questions, and generate insights. How can I help you today?",
     timestamp: "10:00 AM",
   },
 ];
@@ -116,7 +116,7 @@ export default function AIChat() {
       <div className="bg-white p-4 border-b border-gray-300">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 bg-linear-to-br from-blue-500 to-purple-500 rounded-lg flex items-center justify-center">
+            <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-purple-500 rounded-lg flex items-center justify-center">
               <Bot className="w-5 h-5 text-white" />
             </div>
             <div>
@@ -249,7 +249,7 @@ export default function AIChat() {
             <button
               type="submit"
               disabled={isLoading || !input.trim()}
-              className="px-5 py-3 bg-linear-to-r from-blue-500 to-purple-500 text-white rounded-lg hover:from-blue-600 hover:to-purple-600 disabled:opacity-50 disabled:cursor-not-allowed transition-all flex items-center gap-2"
+              className="px-5 py-3 bg-gradient-to-r from-blue-500 to-purple-500 text-white rounded-lg hover:from-blue-600 hover:to-purple-600 disabled:opacity-50 disabled:cursor-not-allowed transition-all flex items-center gap-2"
             >
               <Send className="w-4 h-4" />
               <span className="text-sm font-medium">Send</span>

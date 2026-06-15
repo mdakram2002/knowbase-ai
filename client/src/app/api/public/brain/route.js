@@ -3,7 +3,7 @@ import { GoogleGenerativeAI } from "@google/generative-ai";
 import { MongoClient } from "mongodb";
 
 const MONGODB_URI = process.env.MONGODB_URI;
-const DB_NAME = "secondbrain";
+const DB_NAME = "knowbase";
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 
 let client;
@@ -93,7 +93,7 @@ export async function GET(request) {
         }));
     } else {
       answer =
-        "This is a public API endpoint for the Second Brain knowledge base. To get AI-powered answers, please set up the Gemini API key.";
+        "This is a public API endpoint for the KnowBase AI knowledge base. To get AI-powered answers, please set up the Gemini API key.";
     }
 
     return NextResponse.json({

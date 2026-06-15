@@ -19,7 +19,7 @@ database.connect();
 // CORS Configuration
 const corsOptions = {
   origin: [
-    'https://second-brain-app-client.vercel.app',
+    'https://knowbase-ai-client.vercel.app',
     'http://localhost:3000'
   ],
   credentials: true,
@@ -39,13 +39,13 @@ app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 app.get('/', (req, res) => {
   const baseUrl = `${req.protocol}://${req.get('host')}`;
   res.json({
-    name: 'Second Brain API',
+    name: 'KnowBase AI API',
     version: '1.0.0',
     status: 'operational',
     docs: `${baseUrl}/api-docs`,
     health: `${baseUrl}/health`,
     publicAPI: `${baseUrl}/api/public/brain/query`,
-    frontend: 'https://second-brain-app-client.vercel.app'
+    frontend: 'https://knowbase-ai-client.vercel.app'
   });
 });
 
@@ -62,7 +62,7 @@ app.get('/health', (req, res) => {
 // API documentation
 app.get('/api-docs', (req, res) => {
   res.json({
-    name: 'Second Brain API',
+    name: 'KnowBase AI API',
     version: '1.0.0',
     description: 'AI-powered knowledge management system API',
     endpoints: {

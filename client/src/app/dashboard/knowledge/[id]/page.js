@@ -202,7 +202,7 @@ export default function KnowledgeDetailPage() {
 
       {/* AI Summary */}
       {knowledge.summary && (
-        <Card className="mb-8 bg-linear-to-r from-primary-50 to-primary-100 border-primary-200">
+        <Card className="mb-8 bg-gradient-to-r from-primary-50 to-primary-100 border-primary-200">
           <div className="flex items-start gap-3">
             <Brain className="w-5 h-5 text-primary-600 mt-0.5" />
             <div>

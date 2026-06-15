@@ -69,11 +69,11 @@ export default function Home() {
   ];
 
   return (
-    <div className="min-h-screen overflow-hidden">
+    <div className="min-h-screen overflow-x-hidden">
       {/* Animated Background */}
       <div className="fixed inset-0 -z-10">
         <div
-          className="absolute inset-0 bg-linear-to-br from-primary-50 via-white to-secondary-50"
+          className="absolute inset-0 bg-gradient-to-br from-primary-50 via-white to-secondary-50"
           style={{
             transform: `translateY(${scrollY * 0.5}px)`,
           }}
@@ -105,9 +105,9 @@ export default function Home() {
       </div>
 
       {/* Navigation */}
-      <nav className="relative z-50 px-6 py-4">
+      <nav className="glass-nav sticky top-0 z-50 px-6 py-4">
         <div className="max-w-7xl mx-auto flex justify-between items-center">
-          <div className="flex items-center gap-3">
+          <Link href="/" className="flex items-center gap-3 group">
             <motion.div
               animate={{ rotate: 360 }}
               transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
@@ -117,22 +117,19 @@ export default function Home() {
               <Sparkles className="absolute -top-1 -right-1 w-4 h-4 text-secondary-500" />
             </motion.div>
             <span className="text-2xl font-bold text-gradient">
-              SecondBrain
+              KnowBase AI
             </span>
-          </div>
+          </Link>
           <div className="flex items-center gap-4">
             <Link
               href="/docs"
-              className="text-gray-600 hover:text-primary-600 transition-colors"
+              className="text-gray-600 hover:text-primary-600 transition-colors font-medium"
             >
               Docs
             </Link>
-            <Link
-              href="/dashboard"
-              className="flex items-center gap-2 px-4 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition-colors"
-            >
+            <Link href="/dashboard" className="btn-primary text-sm !px-5 !py-2.5">
               <span>Launch App</span>
-              <ChevronRight className="w-4 h-4" />
+              <ChevronRight className="w-4 h-4 ml-1" />
             </Link>
           </div>
         </div>
@@ -156,26 +153,22 @@ export default function Home() {
               <Brain className="w-8 h-8 text-white" />
             </motion.div>
 
-            <h1 className="text-5xl md:text-7xl font-bold text-gray-900 mb-6">
-              Your <span className="text-gradient">Second Brain</span>
+            <h1 className="text-5xl md:text-7xl font-bold text-gray-900 mb-6 tracking-tight">
+              Your <span className="text-gradient">KnowBase AI</span>
             </h1>
 
             <p className="text-xl md:text-2xl text-gray-600 mb-10 max-w-3xl mx-auto leading-relaxed">
-              An AI-powered knowledge management system that captures,
+              An AI-powered knowledge management platform that captures,
               organizes, and intelligently surfaces your accumulated knowledge.
               Think of it as infrastructure for thought.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center mb-20">
-              <Link href="/dashboard">
-                <button className="px-8 py-3 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors font-semibold text-lg">
-                  Get Started Free
-                </button>
+              <Link href="/dashboard" className="btn-primary text-lg">
+                Get Started Free
               </Link>
-              <Link href="/docs">
-                <button className="px-8 py-3 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors font-semibold text-lg">
-                  View Documentation
-                </button>
+              <Link href="/docs" className="btn-outline text-lg">
+                View Documentation
               </Link>
             </div>
           </motion.div>
@@ -187,8 +180,8 @@ export default function Home() {
             transition={{ delay: 0.4 }}
             className="relative mx-auto max-w-5xl"
           >
-            <div className="bg-white rounded-2xl shadow-2xl p-2 border border-gray-200 overflow-hidden">
-              <div className="relative rounded-xl h-64 md:h-96 bg-linear-to-br from-gray-50 to-gray-100">
+            <div className="bg-white rounded-2xl shadow-2xl shadow-primary-500/10 p-2 border border-gray-200/80 overflow-hidden ring-1 ring-gray-100">
+              <div className="relative rounded-xl h-64 md:h-96 bg-gradient-to-br from-gray-50 to-gray-100">
                 <Image
                   src="/dashboard.png"
                   alt="Interactive Dashboard Preview"
@@ -225,7 +218,7 @@ export default function Home() {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 whileHover={{ y: -8 }}
-                className={`bg-white p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-100 ${
+                className={`glass-card p-8 rounded-2xl hover:shadow-2xl hover:shadow-primary-500/10 transition-all duration-300 ${
                   feature.color === "primary"
                     ? "hover:border-primary-200"
                     : "hover:border-secondary-200"
@@ -252,22 +245,23 @@ export default function Home() {
         </div>
 
         {/* CTA Section */}
-        <div className="bg-gradient-primary py-20">
-          <div className="max-w-4xl mx-auto text-center px-6">
+        <div className="bg-gradient-primary py-20 relative overflow-hidden">
+          <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNmZmYiIGZpbGwtb3BhY2l0eT0iMC4wNSI+PHBhdGggZD0iTTM2IDM0djItaDJ2LTJoLTJ6bTAtNHYyaDJ2LTJoLTJ6bTAtNHYyaDJ2LTJoLTJ6bTAtNHYyaDJ2LTJoLTJ6bTAtNHYyaDJ2LTJoLTJ6bTAtNHYyaDJ2LTJoLTJ6bTAtNHYyaDJ2LTJoLTJ6bTAtNHYyaDJ2LTJoLTJ6bTAtNHYyaDJ2LTJoLTJ6Ii8+PC9nPjwvZz48L3N2Zz4=')] opacity-30" />
+          <div className="max-w-4xl mx-auto text-center px-6 relative">
             <motion.div
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               transition={{ duration: 1 }}
             >
               <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
-                Start Building Your Second Brain Today
+                Start Building Your Knowledge Base Today
               </h2>
-              <p className="text-xl text-primary-100 mb-10 max-w-2xl mx-auto">
+              <p className="text-xl text-white/90 mb-10 max-w-2xl mx-auto">
                 Join thousands of users who have transformed how they capture,
                 organize, and retrieve knowledge.
               </p>
               <Link href="/dashboard">
-                <button className="px-10 py-4 bg-white text-gray-900 rounded-lg hover:bg-gray-100 transition-colors font-semibold text-lg flex items-center justify-center mx-auto">
+                <button className="px-10 py-4 bg-white text-gray-900 rounded-xl hover:bg-gray-50 hover:shadow-xl transition-all duration-300 font-semibold text-lg flex items-center justify-center mx-auto">
                   <Brain className="w-5 h-5 mr-2" />
                   Launch Dashboard
                 </button>
@@ -284,13 +278,10 @@ export default function Home() {
             <div className="flex items-center gap-3 mb-6 md:mb-0">
               <Brain className="w-6 h-6 text-primary-400" />
               <span className="text-lg font-semibold text-white">
-                SecondBrain
+                KnowBase AI
               </span>
             </div>
-            <div className="text-sm">
-              <p>Built for the Altibbe/Hedamo Technical Assessment</p>
-            </div>
-          </div>
+                </div>
         </div>
       </footer>
     </div>

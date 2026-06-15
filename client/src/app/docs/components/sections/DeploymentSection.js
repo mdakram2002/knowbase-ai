@@ -169,7 +169,7 @@ export default function DeploymentSection() {
                 <pre className="text-sm bg-gray-800 text-gray-100 p-3 rounded overflow-x-auto">
                   {`# Clone repository
                     git clone ${projectURLs.github}
-                    cd second-brain-app
+                    cd knowbase-ai
 
                     # Install dependencies
                     npm install
@@ -236,7 +236,7 @@ export default function DeploymentSection() {
                   Deploy to AWS Elastic Beanstalk or ECS
                 </p>
                 <code className="text-xs bg-gray-100 p-2 rounded block">
-                  eb deploy second-brain-app
+                  eb deploy knowbase-ai
                 </code>
               </div>
 

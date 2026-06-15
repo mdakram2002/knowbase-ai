@@ -1,10 +1,10 @@
 export const projectURLs = {
-  frontend: "https://second-brain-app-client.vercel.app",
-  backend: "https://second-brain-app-3efe.onrender.com",
-  github: "https://github.com/mdakram2002/second-brain-app",
-  apiDocs: "https://second-brain-app-3efe.onrender.com/api-docs",
-  healthCheck: "https://second-brain-app-3efe.onrender.com/health",
-  publicAPI: "https://second-brain-app-3efe.onrender.com/api/public/brain/query",
+  frontend: "https://knowbase-ai-client.vercel.app",
+  backend: "https://knowbase-ai.onrender.com",
+  github: "https://github.com/mdakram2002/knowbase-ai",
+  apiDocs: "https://knowbase-ai.onrender.com/api-docs",
+  healthCheck: "https://knowbase-ai.onrender.com/health",
+  publicAPI: "https://knowbase-ai.onrender.com/api/public/brain/query",
 };
 
 export const sections = [

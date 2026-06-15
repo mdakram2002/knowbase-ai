@@ -1,8 +1,7 @@
 {
-  "name": "second-brain-frontend",
+  "name": "knowbase-ai-frontend",
   "version": "1.0.0",
   "private": true,
-  "type": "module",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -28,7 +27,9 @@
     "zustand": "^4.5.7"
   },
   "devDependencies": {
-    "@tailwindcss/postcss": "^4.0.0",
+    "autoprefixer": "^10.4.20",
+    "postcss": "^8.4.49",
+    "tailwindcss": "^3.4.17",
     "eslint": "^8.48.0",
     "eslint-config-next": "14.0.0",
     "prettier": "^3.0.3"
@@ -36,13 +37,13 @@
   "engines": {
     "node": ">=18.0.0"
   },
-  "description": "Second Brain - AI-Powered Knowledge Management System Frontend",
+  "description": "KnowBase AI - AI-Powered Knowledge Management Platform",
   "keywords": [
     "nextjs",
     "react",
     "ai",
     "knowledge-management",
-    "second-brain"
+    "knowbase-ai"
   ],
   "author": "",
   "license": "MIT"

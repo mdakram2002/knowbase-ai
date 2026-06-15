@@ -4,7 +4,7 @@ import { NextResponse } from "next/server";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 
 const MONGODB_URI = process.env.MONGODB_URI;
-const DB_NAME = "secondbrain";
+const DB_NAME = "knowbase";
 const genAI = new GoogleGenerativeAI(
   process.env.GEMINI_API_KEY,
 );

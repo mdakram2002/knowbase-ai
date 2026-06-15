@@ -39,7 +39,7 @@ export default function Sidebar() {
 
   return (
     <aside
-      className={`hidden lg:flex flex-col h-[calc(100vh-4rem)] sticky top-16 ${isCollapsed ? "w-20" : "w-64"} border-r border-gray-200 bg-white transition-all duration-300`}
+      className={`hidden lg:flex flex-col h-[calc(100vh-4rem)] fixed top-16 left-0 ${isCollapsed ? "w-20" : "w-64"} border-r border-gray-200/80 bg-white/90 backdrop-blur-sm transition-all duration-300 overflow-y-auto z-40`}
     >
       {/* Main Navigation */}
       <div className="flex-1 p-4">
@@ -54,8 +54,8 @@ export default function Sidebar() {
           </button>
 
           {!isCollapsed && (
-            <div className="flex items-center space-x-3 p-3 bg-gray-50 rounded-lg mb-6">
-              <div className="w-10 h-10 bg-linear-to-br from-primary-500 to-secondary-500 rounded-lg flex items-center justify-center">
+            <div className="flex items-center space-x-3 p-3 bg-gradient-to-r from-primary-50 to-secondary-50 rounded-xl mb-6 border border-primary-100/50 cursor-pointer hover:shadow-soft transition-shadow">
+              <div className="w-10 h-10 bg-gradient-to-br from-primary-500 to-secondary-500 rounded-lg flex items-center justify-center">
                 <FileText className="w-5 h-5 text-white" />
               </div>
               <div>
@@ -128,7 +128,7 @@ export default function Sidebar() {
               <span>45%</span>
             </div>
             <div className="w-full bg-gray-200 rounded-full h-2">
-              <div className="bg-linear-to-r from-primary-500 to-secondary-500 h-2 rounded-full w-2/5"></div>
+              <div className="bg-gradient-to-r from-primary-500 to-secondary-500 h-2 rounded-full w-2/5"></div>
             </div>
           </div>
         )}

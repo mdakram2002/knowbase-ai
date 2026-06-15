@@ -140,7 +140,7 @@ export default function UsageSection() {
                   Using the Public API
                 </h4>
                 <p className="text-gray-600 mb-3">
-                  Integrate the Second Brain API into your applications:
+                  Integrate the KnowBase AI API into your applications:
                 </p>
 
                 <div className="space-y-3">
@@ -150,7 +150,7 @@ export default function UsageSection() {
                     </h5>
                     <pre className="text-sm bg-gray-800 text-gray-100 p-3 rounded overflow-x-auto">
                       {`    // Query the public API
-                            async function querySecondBrain(question) {
+                            async function queryKnowBase(question) {
                             const response = await fetch(
                                 \`${projectURLs.publicAPI}?q=\${encodeURIComponent(question)}\`
                             );
@@ -158,7 +158,7 @@ export default function UsageSection() {
                             }
 
                             // Example usage
-                            const result = await querySecondBrain(
+                            const result = await queryKnowBase(
                             "What are the benefits of note-taking?"
                             );
                             console.log(result.answer);
@@ -173,7 +173,7 @@ export default function UsageSection() {
                     <pre className="text-sm bg-gray-800 text-gray-100 p-3 rounded overflow-x-auto">
                       {`import requests
 
-                            def query_second_brain(question):
+                            def query_knowbase(question):
                                 response = requests.get(
                                     "${projectURLs.publicAPI}",
                                     params={"q": question}
@@ -181,7 +181,7 @@ export default function UsageSection() {
                                 return response.json()
 
                             # Example usage
-                            result = query_second_brain(
+                            result = query_knowbase(
                                 "How to improve learning retention?"
                             )
                             print(result["answer"])

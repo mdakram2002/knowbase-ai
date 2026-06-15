@@ -110,28 +110,31 @@ export default function Dashboard() {
   ];
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-primary-50/30">
       <Header />
 
-      <div className="flex">
+      <div className="flex mt-16">
         <Sidebar />
 
-        <main className="flex-1 p-6 lg:p-8">
+        <main className="flex-1 p-6 lg:p-8 lg:ml-64">
           {/* Dashboard Header */}
-          <div className="mb-8">
-            <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4 mb-6">
+          <div className="mb-8 rounded-[2rem] border border-gray-200 bg-white/90 p-6 shadow-lg shadow-slate-200/50 backdrop-blur-sm">
+            <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4 mb-4">
               <div>
                 <motion.div
                   initial={{ opacity: 0, y: -20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5 }}
                 >
+                  <div className="inline-flex items-center gap-3 rounded-full bg-gradient-to-r from-primary-50 to-secondary-50 px-4 py-2 mb-4 text-sm font-semibold text-primary-700 ring-1 ring-primary-100">
+                    <Brain className="w-4 h-4" />
+                    Knowledge hub refreshed
+                  </div>
                   <h1 className="text-3xl lg:text-4xl font-bold text-gray-900">
-                    Knowledge Dashboard
+                    Your Knowledge Dashboard
                   </h1>
                   <p className="text-gray-600 mt-2 max-w-2xl">
-                    Manage and explore your accumulated knowledge. Everything
-                    you learn, organized in one place.
+                    Quickly scan your latest notes, links, insights, and tags with a clean, modern workspace.
                   </p>
                 </motion.div>
               </div>
@@ -145,13 +148,37 @@ export default function Dashboard() {
                 </Button>
                 <Button
                   href="/dashboard/knowledge/new"
-                  className="hover:shadow-md transition-shadow text-[14px] bg-gray-800 text-white hover:bg-gray-900 px-5 py-1 rounded-lg font-medium"
+                  className="shadow-md hover:shadow-lg transition-shadow"
                 >
                   <Plus className="w-4 h-4 mr-2" />
                   Add Knowledge
                 </Button>
               </div>
             </div>
+            {/* <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+              <div className="rounded-3xl bg-gradient-to-r from-primary-600 to-secondary-600 p-5 text-white shadow-xl">
+                <p className="text-sm uppercase tracking-[0.2em] opacity-90">
+                  Knowledge score
+                </p>
+                <p className="mt-3 text-4xl font-bold">{stats.total}</p>
+                <p className="mt-2 text-sm opacity-90">
+                  A fresh overview of your current content and activity.
+                </p>
+              </div>
+              <div className="rounded-3xl border border-gray-200 bg-white p-5 shadow-sm">
+                <p className="text-sm font-semibold text-gray-500">Notes</p>
+                <p className="mt-3 text-3xl font-bold text-gray-900">{stats.notes}</p>
+              </div>
+              <div className="rounded-3xl border border-gray-200 bg-white p-5 shadow-sm">
+                <p className="text-sm font-semibold text-gray-500">Links</p>
+                <p className="mt-3 text-3xl font-bold text-gray-900">{stats.links}</p>
+              </div>
+              <div className="rounded-3xl border border-gray-200 bg-white p-5 shadow-sm">
+                <p className="text-sm font-semibold text-gray-500">Insights</p>
+                <p className="mt-3 text-3xl font-bold text-gray-900">{stats.insights}</p>
+              </div>
+            </div> */}
+          </div>
 
             {/* Enhanced Stats Cards - Removed blinking effects */}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
@@ -180,7 +207,7 @@ export default function Dashboard() {
                           </p>
                         </div>
                         <div
-                          className={`p-3 rounded-xl bg-linear-to-br ${stat.gradient} text-white`}
+                          className={`p-3 rounded-xl bg-gradient-to-br ${stat.gradient} text-white`}
                         >
                           <stat.icon className="w-6 h-6" />
                         </div>
@@ -207,7 +234,7 @@ export default function Dashboard() {
                                 )}%`,
                               }}
                               transition={{ delay: 0.5, duration: 1 }}
-                              className={`h-full bg-linear-to-r ${stat.gradient} rounded-full`}
+                              className={`h-full bg-gradient-to-r ${stat.gradient} rounded-full`}
                             />
                           </div>
                         </div>
@@ -235,7 +262,7 @@ export default function Dashboard() {
                                 )}%`,
                               }}
                               transition={{ delay: 0.7, duration: 1 }}
-                              className={`h-full bg-linear-to-r ${stat.gradient} rounded-full`}
+                              className={`h-full bg-gradient-to-r ${stat.gradient} rounded-full`}
                             />
                           </div>
                         </div>
@@ -348,7 +375,6 @@ export default function Dashboard() {
                 )}
               </div>
             </Card>
-          </div>
 
           {/* Main Content */}
           <div className="grid lg:grid-cols-3 gap-8">
@@ -385,7 +411,7 @@ export default function Dashboard() {
                     <p className="text-gray-600 mb-8 max-w-md mx-auto">
                       {searchQuery
                         ? "Try adjusting your search terms or filters to find what you're looking for."
-                        : "Start building your second brain by adding notes, links, and insights."}
+                        : "Start building your knowledge base by adding notes, links, and insights."}
                     </p>
                     <Button
                       href="/dashboard/knowledge/new"

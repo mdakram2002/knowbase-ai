@@ -1,18 +1,18 @@
-# Second Brain App
+# KnowBase AI
 
-A **modern, responsive full-stack web application** for managing and organizing knowledge resources such as **notes, links, and insights** with a clean UI and scalable backend.
+**AI-Powered Knowledge Management Platform** — a modern, responsive full-stack web application for managing and organizing knowledge resources such as **notes, links, and insights** with a clean UI and scalable backend.
 
 ---
 
 ## Live Demo
 
-- **Live Application:** https://second-brain-app-client.vercel.app
-- **Backend API:** https://second-brain-app-3efe.onrender.com
-- **Documentation:** https://second-brain-app-client.vercel.app/docs
+- **Live Application:** https://knowbase-ai-client.vercel.app
+- **Backend API:** https://knowbase-ai.onrender.com
+- **Documentation:** https://knowbase-ai-client.vercel.app/docs
 
 
 ##  Demo & Screenshots
-> A quick visual walkthrough of the Second Brain App highlighting core features, UI polish, and AI interactions.
+> A quick visual walkthrough of KnowBase AI highlighting core features, UI polish, and AI interactions.
 
 ### Dashboard & Knowledge Management
 ![Dashboard View](./client//public/dashboard.png)
@@ -132,7 +132,7 @@ POST   /api/items/:id/favorite   # Toggle favorite
 
 ### Folder Structure
 ```
-second-brain-app/
+knowbase-ai/
 │
 ├── client/
 │   ├── public/
@@ -184,8 +184,8 @@ second-brain-app/
 ```
 Installation
 Clone the Repository
-git clone https://github.com/mdakram2002/second-brain-app.git
-cd second-brain-app
+git clone https://github.com/mdakram2002/knowbase-ai.git
+cd knowbase-ai
 
 Backend Setup
 cd server
