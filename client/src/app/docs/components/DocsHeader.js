@@ -20,13 +20,6 @@ export default function DocsHeader() {
           Home
         </Link>
       </div>
-      <h1 className="text-4xl font-bold text-gray-900 mb-4">
-        KnowBase AI Documentation
-      </h1>
-      <p className="text-gray-600 mb-6">
-        Complete technical documentation for the AI-powered knowledge management system
-      </p>
-
       {/* Project Links */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
         <a href={projectURLs.frontend} target="_blank" rel="noopener noreferrer" className="group">

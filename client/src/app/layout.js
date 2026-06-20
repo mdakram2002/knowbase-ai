@@ -9,7 +9,7 @@ const inter = Inter({
 });
 
 export const metadata = {
-  title: "KnowBase AI - AI-Powered Knowledge Management Platform",
+  title: "KnowBase AI-Powered Knowledge Management Platform",
   description:
     "Capture, organize, and intelligently surface your knowledge with AI-powered semantic search",
 };
