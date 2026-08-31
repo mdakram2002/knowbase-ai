@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+require("dotenv").config();
 
 class Database {
   constructor() {
@@ -10,6 +11,12 @@ class Database {
       const MONGODB_URI =
         process.env.MONGODB_URI;
 
+      if (!MONGODB_URI) {
+        throw new Error("MONGODB_URI environment variable is not set");
+      }
+
+      console.log("Connecting to MongoDB...");
+      
       await mongoose.connect(MONGODB_URI, {
         useNewUrlParser: true,
         useUnifiedTopology: true,
