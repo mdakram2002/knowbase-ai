@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Card from "@/components/ui/Card";
-import { Monitor, Server, GitPullRequest, ArrowLeft } from "lucide-react";
+import { Monitor, Server, GitPullRequest, ArrowLeft, Home } from "lucide-react";
 import { projectURLs } from "../utils/constants";
 
 export default function DocsHeader() {
@@ -15,10 +15,16 @@ export default function DocsHeader() {
             Complete technical documentation for the AI-powered knowledge management system.
           </p>
         </div>
-        <Link href="/" className="inline-flex items-center gap-2 rounded-full border border-gray-200 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm transition hover:border-primary-300 hover:text-primary-600">
-          <ArrowLeft className="w-4 h-4" />
-          Home
-        </Link>
+        <div className="flex gap-2">
+          <Link href="/dashboard" className="inline-flex items-center gap-2 rounded-full border border-gray-200 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm transition hover:border-primary-300 hover:text-primary-600">
+            <Home className="w-4 h-4" />
+            Dashboard
+          </Link>
+          <Link href="/" className="inline-flex items-center gap-2 rounded-full border border-gray-200 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm transition hover:border-primary-300 hover:text-primary-600">
+            <ArrowLeft className="w-4 h-4" />
+            Home
+          </Link>
+        </div>
       </div>
       {/* Project Links */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">

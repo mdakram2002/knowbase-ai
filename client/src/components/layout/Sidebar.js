@@ -13,9 +13,11 @@ import {
   Settings,
   HelpCircle,
   FileText,
+  User,
 } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useNavbar } from "@/contexts/NavbarContext";
 
 const navItems = [
   { href: "/dashboard", icon: Home, label: "Dashboard" },
@@ -29,6 +31,7 @@ const navItems = [
 ];
 
 const secondaryItems = [
+  { href: "/dashboard/profile", icon: User, label: "Profile" },
   { href: "/dashboard/settings", icon: Settings, label: "Settings" },
   { href: "/docs", icon: HelpCircle, label: "Help & Docs" },
 ];
@@ -36,6 +39,7 @@ const secondaryItems = [
 export default function Sidebar() {
   const pathname = usePathname();
   const [isCollapsed, setIsCollapsed] = useState(false);
+  const { hideNavbar } = useNavbar();
 
   return (
     <aside
@@ -75,6 +79,7 @@ export default function Sidebar() {
               <Link
                 key={item.href}
                 href={item.href}
+                onClick={hideNavbar}
                 className={`flex items-center ${isCollapsed ? "justify-center p-3" : "justify-between p-3"} rounded-lg transition-colors ${
                   isActive
                     ? "bg-primary-50 text-primary-600"
@@ -107,6 +112,7 @@ export default function Sidebar() {
               <Link
                 key={item.href}
                 href={item.href}
+                onClick={hideNavbar}
                 className={`flex items-center ${isCollapsed ? "justify-center p-3" : "p-3"} rounded-lg transition-colors ${
                   isActive
                     ? "bg-gray-100 text-gray-900"

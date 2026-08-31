@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import {
   Bell,
@@ -12,10 +12,12 @@ import {
   ChevronDown,
   Brain,
 } from "lucide-react";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
+import { useNavbar } from "@/contexts/NavbarContext";
 
 const mobileNavItems = [
   { href: "/dashboard", label: "Dashboard" },
+  { href: "/dashboard/profile", label: "Profile" },
   { href: "/dashboard/notes", label: "Notes" },
   { href: "/dashboard/links", label: "Links" },
   { href: "/dashboard/insights", label: "Insights" },
@@ -31,9 +33,26 @@ export default function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
   const router = useRouter();
+  const pathname = usePathname();
+  const { isNavbarVisible, hideNavbar, showNavbar } = useNavbar();
+
+  // Hide navbar when route changes
+  useEffect(() => {
+    setIsMobileMenuOpen(false);
+    setIsUserMenuOpen(false);
+  }, [pathname]);
 
   return (
-    <header className="glass-nav fixed top-0 left-0 right-0 z-50">
+    <>
+      {/* Hover trigger to show navbar */}
+      <div
+        className="fixed top-0 left-0 right-0 h-2 z-50 cursor-pointer"
+        onMouseEnter={showNavbar}
+      />
+      
+      <header className={`glass-nav fixed top-0 left-0 right-0 z-50 transition-transform duration-300 ease-in-out ${
+        isNavbarVisible ? "translate-y-0" : "-translate-y-full"
+      }`}>
       <div className="px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           <div className="flex items-center">
@@ -87,6 +106,10 @@ export default function Header() {
                   <a
                     href="/dashboard/profile"
                     className="flex items-center px-4 py-2.5 text-sm text-gray-700 hover:bg-primary-50 hover:text-primary-700 transition-colors"
+                    onClick={() => {
+                      setIsUserMenuOpen(false);
+                      setIsMobileMenuOpen(false);
+                    }}
                   >
                     <User className="w-4 h-4 mr-3" />
                     Profile
@@ -94,6 +117,10 @@ export default function Header() {
                   <a
                     href="/dashboard/settings"
                     className="flex items-center px-4 py-2.5 text-sm text-gray-700 hover:bg-primary-50 hover:text-primary-700 transition-colors"
+                    onClick={() => {
+                      setIsUserMenuOpen(false);
+                      setIsMobileMenuOpen(false);
+                    }}
                   >
                     <Settings className="w-4 h-4 mr-3" />
                     Settings
@@ -130,5 +157,6 @@ export default function Header() {
         </div>
       )}
     </header>
+    </>
   );
 }

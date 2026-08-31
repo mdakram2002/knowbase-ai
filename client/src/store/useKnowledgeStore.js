@@ -13,6 +13,7 @@ const mockData = {
       tags: ['react', 'performance', 'frontend'],
       views: 42,
       isFavorite: true,
+      isArchived: false,
       createdAt: '2024-01-15T10:30:00Z'
     },
     {
@@ -23,6 +24,7 @@ const mockData = {
       tags: ['ai', 'development', 'future'],
       views: 28,
       isFavorite: false,
+      isArchived: false,
       createdAt: '2024-01-14T14:20:00Z'
     },
     {
@@ -33,6 +35,7 @@ const mockData = {
       tags: ['database', 'performance', 'backend'],
       views: 35,
       isFavorite: true,
+      isArchived: false,
       createdAt: '2024-01-13T09:15:00Z'
     },
     {
@@ -43,6 +46,7 @@ const mockData = {
       tags: ['typescript', 'best-practices'],
       views: 31,
       isFavorite: false,
+      isArchived: false,
       createdAt: '2024-01-12T16:45:00Z'
     },
     {
@@ -53,6 +57,7 @@ const mockData = {
       tags: ['nextjs', 'react', 'framework'],
       views: 56,
       isFavorite: true,
+      isArchived: false,
       createdAt: '2024-01-11T11:10:00Z'
     },
     {
@@ -63,6 +68,7 @@ const mockData = {
       tags: ['architecture', 'monorepo', 'scalability'],
       views: 23,
       isFavorite: false,
+      isArchived: true,
       createdAt: '2024-01-10T13:25:00Z'
     }
   ],
