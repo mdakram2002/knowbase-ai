@@ -174,15 +174,12 @@ export default function LoginPage() {
         {/* Features */}
         <div className="mt-8 grid grid-cols-3 gap-4 text-center">
           <div>
-            <div className="text-2xl font-bold text-blue-600">🔒</div>
             <p className="text-xs text-gray-600">Secure</p>
           </div>
           <div>
-            <div className="text-2xl font-bold text-indigo-600">⚡</div>
             <p className="text-xs text-gray-600">Fast</p>
           </div>
           <div>
-            <div className="text-2xl font-bold text-blue-600">✨</div>
             <p className="text-xs text-gray-600">Smart</p>
           </div>
         </div>
