@@ -20,7 +20,8 @@
     "helmet": "^7.2.0",
     "jsonwebtoken": "^9.0.3",
     "mongoose": "^7.8.9",
-    "morgan": "^1.10.1"
+    "morgan": "^1.10.1",
+    "redis": "^6.2.1"
   },
   "devDependencies": {
     "nodemon": "^3.1.11"

@@ -12,6 +12,9 @@ router.use(authMiddleware.verifyToken);
 
 router.get('/me', authController.getCurrentUser);
 router.put('/profile', authController.updateProfile);
+router.post('/change-password', authController.changePassword);
+router.delete('/profile', authController.deleteProfile);
+router.delete('/data', authController.deleteAllData);
 router.post('/logout', authController.logout);
 
 module.exports = router;

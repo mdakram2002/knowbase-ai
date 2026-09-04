@@ -26,6 +26,17 @@ const userSchema = new mongoose.Schema({
 
   avatar: {
     type: String,
+    default: "https://api.dicebear.com/7.x/avataaars/svg?seed=",
+  },
+
+  bio: {
+    type: String,
+    default: "",
+    maxlength: [500, "Bio cannot exceed 500 characters"],
+  },
+
+  location: {
+    type: String,
     default: "",
   },
 
@@ -47,6 +58,12 @@ const userSchema = new mongoose.Schema({
     },
   },
 
+  socialLinks: {
+    twitter: { type: String, default: "" },
+    github: { type: String, default: "" },
+    linkedin: { type: String, default: "" },
+  },
+
   lastActive: {
     type: Date,
     default: Date.now,
@@ -56,6 +73,18 @@ const userSchema = new mongoose.Schema({
     type: Boolean,
     default: true,
   },
+
+  isEmailVerified: {
+    type: Boolean,
+    default: false,
+  },
+
+  refreshTokens: [
+    {
+      token: String,
+      createdAt: { type: Date, default: Date.now },
+    },
+  ],
 
   createdAt: {
     type: Date,
@@ -92,12 +121,32 @@ userSchema.methods.comparePassword = async function (candidatePassword) {
   return await bcrypt.compare(candidatePassword, this.password);
 };
 
+// Instance method to check password
+userSchema.methods.comparePassword = async function (candidatePassword) {
+  return await bcrypt.compare(candidatePassword, this.password);
+};
+
 // Instance method to get public profile
 userSchema.methods.toPublicProfile = function () {
   const user = this.toObject();
   delete user.password;
+  delete user.refreshTokens;
   delete user.__v;
   return user;
+};
+
+// Instance method to add refresh token
+userSchema.methods.addRefreshToken = function (token) {
+  this.refreshTokens.push({ token, createdAt: new Date() });
+  // Keep only last 5 refresh tokens
+  if (this.refreshTokens.length > 5) {
+    this.refreshTokens = this.refreshTokens.slice(-5);
+  }
+};
+
+// Instance method to remove refresh token
+userSchema.methods.removeRefreshToken = function (token) {
+  this.refreshTokens = this.refreshTokens.filter(rt => rt.token !== token);
 };
 
 const User = mongoose.model("User", userSchema);

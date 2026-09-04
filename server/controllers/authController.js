@@ -1,42 +1,79 @@
 const User = require('../models/User');
 const jwt = require('jsonwebtoken');
+const Knowledge = require('../models/Knowledge');
+const JWT_SECRET = process.env.JWT_SECRET;
 
 class AuthController {
-  // Generate JWT token
   generateToken(userId) {
     return jwt.sign(
       { id: userId },
-      process.env.JWT_SECRET || 'your-secret-key',
+      JWT_SECRET,
       { expiresIn: '7d' }
     );
   }
 
-  // Register new user
+  validateEmail(email) {
+    const emailRegex = /^\S+@\S+\.\S+$/;
+    return emailRegex.test(email);
+  }
+
+  validatePassword(password) {
+    return password && password.length >= 6;
+  }
+
   async register(req, res) {
     try {
-      const { name, email, password } = req.body;
+      const { name, email, password, passwordConfirm } = req.body;
+
+      // Validation
+      if (!name || !email || !password) {
+        return res.status(400).json({
+          success: false,
+          error: 'Name, email, and password are required'
+        });
+      }
+
+      if (!this.validateEmail(email)) {
+        return res.status(400).json({
+          success: false,
+          error: 'Invalid email format'
+        });
+      }
+
+      if (!this.validatePassword(password)) {
+        return res.status(400).json({
+          success: false,
+          error: 'Password must be at least 6 characters'
+        });
+      }
+
+      if (password !== passwordConfirm) {
+        return res.status(400).json({
+          success: false,
+          error: 'Passwords do not match'
+        });
+      }
 
       // Check if user exists
       const existingUser = await User.findOne({ email });
       if (existingUser) {
         return res.status(400).json({
           success: false,
-          error: 'User already exists'
+          error: 'Email already registered'
         });
       }
 
-      // Create user
       const user = await User.create({
-        name,
-        email,
-        password
+        name: name.trim(),
+        email: email.toLowerCase().trim(),
+        password,
+        avatar: `https://api.dicebear.com/7.x/avataaars/svg?seed=${email}`
       });
-
-      // Generate token
       const token = this.generateToken(user._id);
-
+      
       res.status(201).json({
         success: true,
+        message: 'Registration successful',
         data: {
           user: user.toPublicProfile(),
           token
@@ -46,22 +83,29 @@ class AuthController {
       console.error('Registration error:', error);
       res.status(500).json({
         success: false,
-        error: 'Registration failed'
+        error: 'Registration failed. Please try again.'
       });
     }
   }
 
-  // Login user
   async login(req, res) {
     try {
       const { email, password } = req.body;
 
-      // Find user
-      const user = await User.findOne({ email }).select('+password');
+      // Validation
+      if (!email || !password) {
+        return res.status(400).json({
+          success: false,
+          error: 'Email and password are required'
+        });
+      }
+
+      // Find user with password field
+      const user = await User.findOne({ email: email.toLowerCase().trim() }).select('+password');
       if (!user) {
         return res.status(401).json({
           success: false,
-          error: 'Invalid credentials'
+          error: 'Invalid email or password'
         });
       }
 
@@ -70,19 +114,26 @@ class AuthController {
       if (!isPasswordValid) {
         return res.status(401).json({
           success: false,
-          error: 'Invalid credentials'
+          error: 'Invalid email or password'
         });
       }
 
-      // Update last active
-      user.lastActive = Date.now();
-      await user.save();
+      // Check if account is active
+      if (!user.isActive) {
+        return res.status(403).json({
+          success: false,
+          error: 'Account is deactivated'
+        });
+      }
 
-      // Generate token
+      user.lastActive = Date.now();
       const token = this.generateToken(user._id);
+      user.addRefreshToken(token);
+      await user.save();
 
       res.json({
         success: true,
+        message: 'Login successful',
         data: {
           user: user.toPublicProfile(),
           token
@@ -92,7 +143,7 @@ class AuthController {
       console.error('Login error:', error);
       res.status(500).json({
         success: false,
-        error: 'Login failed'
+        error: 'Login failed. Please try again.'
       });
     }
   }
@@ -125,12 +176,15 @@ class AuthController {
   // Update user profile
   async updateProfile(req, res) {
     try {
-      const updates = req.body;
+      const { name, bio, location, avatar, socialLinks, preferences } = req.body;
 
-      // Remove fields that shouldn't be updated
-      delete updates.email;
-      delete updates.password;
-      delete updates.role;
+      const updates = {};
+      if (name) updates.name = name.trim();
+      if (bio !== undefined) updates.bio = bio;
+      if (location !== undefined) updates.location = location;
+      if (avatar) updates.avatar = avatar;
+      if (socialLinks) updates.socialLinks = socialLinks;
+      if (preferences) updates.preferences = preferences;
 
       const user = await User.findByIdAndUpdate(
         req.userId,
@@ -140,6 +194,7 @@ class AuthController {
 
       res.json({
         success: true,
+        message: 'Profile updated successfully',
         data: user.toPublicProfile()
       });
     } catch (error) {
@@ -151,12 +206,156 @@ class AuthController {
     }
   }
 
-  // Logout (client-side operation, just returns success)
+  async changePassword(req, res) {
+    try {
+      const { currentPassword, newPassword, confirmPassword } = req.body;
+
+      if (!currentPassword || !newPassword || !confirmPassword) {
+        return res.status(400).json({
+          success: false,
+          error: 'All password fields are required'
+        });
+      }
+
+      if (!this.validatePassword(newPassword)) {
+        return res.status(400).json({
+          success: false,
+          error: 'New password must be at least 6 characters'
+        });
+      }
+
+      if (newPassword !== confirmPassword) {
+        return res.status(400).json({
+          success: false,
+          error: 'Passwords do not match'
+        });
+      }
+
+      const user = await User.findById(req.userId).select('+password');
+
+      // Verify current password
+      const isPasswordValid = await user.comparePassword(currentPassword);
+      if (!isPasswordValid) {
+        return res.status(401).json({
+          success: false,
+          error: 'Current password is incorrect'
+        });
+      }
+
+      user.password = newPassword;
+      await user.save();
+
+      res.json({
+        success: true,
+        message: 'Password changed successfully'
+      });
+    } catch (error) {
+      console.error('Change password error:', error);
+      res.status(500).json({
+        success: false,
+        error: 'Failed to change password'
+      });
+    }
+  }
+
+  async deleteProfile(req, res) {
+    try {
+      const { password } = req.body;
+
+      if (!password) {
+        return res.status(400).json({
+          success: false,
+          error: 'Password is required to delete account'
+        });
+      }
+
+      const user = await User.findById(req.userId).select('+password');
+      if (!user) {
+        return res.status(404).json({
+          success: false,
+          error: 'User not found'
+        });
+      }
+
+      const isPasswordValid = await user.comparePassword(password);
+      if (!isPasswordValid) {
+        return res.status(401).json({
+          success: false,
+          error: 'Password is incorrect'
+        });
+      }
+
+      await Knowledge.deleteMany({ userId: req.userId });
+
+      await User.findByIdAndDelete(req.userId);
+
+      res.json({
+        success: true,
+        message: 'Account and all associated data deleted successfully'
+      });
+    } catch (error) {
+      console.error('Delete profile error:', error);
+      res.status(500).json({
+        success: false,
+        error: 'Failed to delete profile'
+      });
+    }
+  }
+
+  async deleteAllData(req, res) {
+    try {
+      const { password } = req.body;
+
+      if (!password) {
+        return res.status(400).json({
+          success: false,
+          error: 'Password is required'
+        });
+      }
+
+      const user = await User.findById(req.userId).select('+password');
+      if (!user) {
+        return res.status(404).json({
+          success: false,
+          error: 'User not found'
+        });
+      }
+
+      const isPasswordValid = await user.comparePassword(password);
+      if (!isPasswordValid) {
+        return res.status(401).json({
+          success: false,
+          error: 'Password is incorrect'
+        });
+      }
+
+      await Knowledge.deleteMany({ userId: req.userId });
+
+      res.json({
+        success: true,
+        message: 'All data deleted successfully. Your account remains active.'
+      });
+    } catch (error) {
+      console.error('Delete data error:', error);
+      res.status(500).json({
+        success: false,
+        error: 'Failed to delete data'
+      });
+    }
+  }
+
   async logout(req, res) {
-    res.json({
-      success: true,
-      message: 'Logged out successfully'
-    });
+    try {
+      res.json({
+        success: true,
+        message: 'Logged out successfully'
+      });
+    } catch (error) {
+      res.status(500).json({
+        success: false,
+        error: 'Logout failed'
+      });
+    }
   }
 }
 

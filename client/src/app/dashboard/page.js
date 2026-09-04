@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
+import ProtectedRoute from "@/components/ProtectedRoute";
 import {
   Plus,
   Search,
@@ -30,6 +31,14 @@ import toast from "react-hot-toast";
 import { useKnowledgeStore } from "@/store/useKnowledgeStore";
 
 export default function Dashboard() {
+  return (
+    <ProtectedRoute>
+      <DashboardContent />
+    </ProtectedRoute>
+  );
+}
+
+function DashboardContent() {
   const [viewMode, setViewMode] = useState("grid");
   const [searchQuery, setSearchQuery] = useState("");
   const [filterType, setFilterType] = useState("all");

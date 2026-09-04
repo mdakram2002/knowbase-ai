@@ -15,9 +15,11 @@ import {
   Shield,
   Cpu,
 } from "lucide-react";
+import { useAuth } from "@/contexts/AuthContext";
 
 export default function Home() {
   const [scrollY, setScrollY] = useState(0);
+  const { isAuthenticated } = useAuth();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -123,14 +125,29 @@ export default function Home() {
           <div className="flex items-center gap-4">
             <Link
               href="/docs"
-              className="text-gray-600 hover:text-primary-600 transition-colors font-medium"
+              className="text-gray-600 hover:text-primary-600 transition-colors font-medium hidden sm:inline-block"
             >
               Docs
             </Link>
-            <Link href="/dashboard" className="btn-primary text-sm !px-5 !py-2.5">
-              <span>Launch App</span>
-              <ChevronRight className="w-4 h-4 ml-1" />
-            </Link>
+            {isAuthenticated ? (
+              <Link href="/dashboard" className="btn-primary text-sm !px-5 !py-2.5">
+                <span>Dashboard</span>
+                <ChevronRight className="w-4 h-4 ml-1" />
+              </Link>
+            ) : (
+              <>
+                <Link
+                  href="/auth/login"
+                  className="text-gray-600 hover:text-primary-600 transition-colors font-medium hidden sm:inline-block"
+                >
+                  Sign In
+                </Link>
+                <Link href="/auth/signup" className="btn-primary text-sm !px-5 !py-2.5">
+                  <span>Sign Up</span>
+                  <ChevronRight className="w-4 h-4 ml-1" />
+                </Link>
+              </>
+            )}
           </div>
         </div>
       </nav>
@@ -154,7 +171,7 @@ export default function Home() {
             </motion.div>
 
             <h1 className="text-5xl md:text-7xl font-bold text-gray-900 mb-6 tracking-tight">
-              Your <span className="text-gradient">KnowBase AI</span>
+              Your <span className="text-gradient">KnowBase AI</span> Platform
             </h1>
 
             <p className="text-xl md:text-2xl text-gray-600 mb-10 max-w-3xl mx-auto leading-relaxed">
@@ -164,12 +181,20 @@ export default function Home() {
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center mb-20">
-              <Link href="/dashboard" className="btn-primary text-lg">
-                Get Started Free
-              </Link>
-              <Link href="/docs" className="btn-outline text-lg">
-                View Documentation
-              </Link>
+              {isAuthenticated ? (
+                <Link href="/dashboard" className="btn-primary text-lg">
+                  Go to Dashboard
+                </Link>
+              ) : (
+                <>
+                  <Link href="/auth/signup" className="btn-primary text-lg">
+                    Get Started Free
+                  </Link>
+                  <Link href="/docs" className="btn-outline text-lg">
+                    View Documentation
+                  </Link>
+                </>
+              )}
             </div>
           </motion.div>
 
@@ -260,12 +285,21 @@ export default function Home() {
                 Join thousands of users who have transformed how they capture,
                 organize, and retrieve knowledge.
               </p>
-              <Link href="/dashboard">
-                <button className="px-10 py-4 bg-white text-gray-900 rounded-xl hover:bg-gray-50 hover:shadow-xl transition-all duration-300 font-semibold text-lg flex items-center justify-center mx-auto">
-                  <Brain className="w-5 h-5 mr-2" />
-                  Launch Dashboard
-                </button>
-              </Link>
+              {isAuthenticated ? (
+                <Link href="/dashboard">
+                  <button className="px-10 py-4 bg-white text-gray-900 rounded-xl hover:bg-gray-50 hover:shadow-xl transition-all duration-300 font-semibold text-lg flex items-center justify-center mx-auto">
+                    <Brain className="w-5 h-5 mr-2" />
+                    Go to Dashboard
+                  </button>
+                </Link>
+              ) : (
+                <Link href="/auth/signup">
+                  <button className="px-10 py-4 bg-white text-gray-900 rounded-xl hover:bg-gray-50 hover:shadow-xl transition-all duration-300 font-semibold text-lg flex items-center justify-center mx-auto">
+                    <Brain className="w-5 h-5 mr-2" />
+                    Create Free Account
+                  </button>
+                </Link>
+              )}
             </motion.div>
           </div>
         </div>
@@ -281,7 +315,7 @@ export default function Home() {
                 KnowBase AI
               </span>
             </div>
-                </div>
+          </div>
         </div>
       </footer>
     </div>

@@ -1,6 +1,8 @@
 import { Inter } from "next/font/google";
 import { Toaster } from "react-hot-toast";
 import { NavbarProvider } from "@/contexts/NavbarContext";
+import { AuthProvider } from "@/contexts/AuthContext";
+import { GuestProvider } from "@/contexts/GuestContext";
 import "./globals.css";
 
 const inter = Inter({
@@ -19,9 +21,13 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" className={inter.variable}>
       <body className="font-sans antialiased">
-        <NavbarProvider>
-          {children}
-        </NavbarProvider>
+        <GuestProvider>
+          <AuthProvider>
+            <NavbarProvider>
+              {children}
+            </NavbarProvider>
+          </AuthProvider>
+        </GuestProvider>
         <Toaster
           position="top-right"
           toastOptions={{

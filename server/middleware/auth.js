@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken');
+const JWT_SECRET = process.env.JWT_SECRET;
 
 const authMiddleware = {
-  // Verify JWT token and Get token form header
   verifyToken: (req, res, next) => {
     try {
       const authHeader = req.headers.authorization;
@@ -13,13 +13,8 @@ const authMiddleware = {
         });
       }
       const token = authHeader.split(' ')[1];
+      const decoded = jwt.verify(token, JWT_SECRET);
 
-      const decoded = jwt.verify(
-        token,
-        process.env.JWT_SECRET
-      );
-
-      // Add user ID to request
       req.userId = decoded.id;
       next();
 
@@ -29,7 +24,7 @@ const authMiddleware = {
       if (error.name === 'JsonWebTokenError') {
         return res.status(401).json({
           success: false,
-          error: 'Invalid token in middleware/auth.js'
+          error: 'Invalid token'
         });
       }
 
@@ -54,25 +49,18 @@ const authMiddleware = {
 
       if (authHeader && authHeader.startsWith('Bearer ')) {
         const token = authHeader.split(' ')[1];
-        const decoded = jwt.verify(
-          token,
-          process.env.JWT_SECRET
-        );
+        const decoded = jwt.verify(token, JWT_SECRET);
         req.userId = decoded.id;
       }
 
       next();
     } catch (error) {
-      // If token is invalid, continue without authentication
       next();
     }
   },
 
   // Check if user is admin
   isAdmin: (req, res, next) => {
-    // This would check if the user has admin role
-    // For now, we'll just allow access
-    // In a real app, you'd fetch the user and check their role
     next();
   },
 
