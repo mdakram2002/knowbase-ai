@@ -229,7 +229,7 @@ Referrer-Policy: strict-origin-when-cross-origin
  Pagination limits enforced
 ```
 
-## 🗄️ Redis Schema - Guest Data
+##  Redis Schema - Guest Data
 
 ### Guest Session
 ```json

@@ -180,7 +180,7 @@ knowbase-ai/
 └── README.md (this file)
 ```
 
-## 🔌 Key API Endpoints
+##  Key API Endpoints
 
 ### Public Browsing (No Auth Required)
 ```
@@ -261,7 +261,7 @@ Authentication         5 req          15 min  ← Brute force protection
 API Endpoints          30 req         15 min
 ```
 
-## 🗄️ Database Schema
+## Database Schema
 
 ### User Model
 ```javascript
@@ -455,7 +455,7 @@ Rate Limiting:
   ☐ After 15min window, should work
 ```
 
-## 🐛 Common Issues
+## Common Issues
 
 ### Port Already in Use
 ```bash
@@ -571,7 +571,7 @@ Built with:
 
 ---
 
-**Status:** ✅ Production Ready | 🔐 Security Hardened | 📈 Scalable | 📚 Fully Documented
+**Status:** Production Ready | Security Hardened | Scalable | Fully Documented
 
 **Last Updated:** January 2024
 
